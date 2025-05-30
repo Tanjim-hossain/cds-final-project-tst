@@ -6,7 +6,7 @@ class TSTNode:
         self.right = None
         self.is_end = False
 
-class TernarySearchTree:
+class  TernarySearchTree:
     def __init__(self):
         self.root = None
 
