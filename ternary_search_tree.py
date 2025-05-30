@@ -1,4 +1,6 @@
 class TSTNode:
+    __slots__ = ['char', 'left', 'mid', 'right', 'is_end']  # Memory optimization
+
     def __init__(self, char):
         self.char = char
         self.left = None
@@ -6,46 +8,69 @@ class TSTNode:
         self.right = None
         self.is_end = False
 
-class  TernarySearchTree:
+
+class TernarySearchTree:
     def __init__(self):
         self.root = None
 
+    #CHANGED: Iterative version of insert
     def insert(self, word):
-        def _insert(node, word, idx):
+        if not word:
+            return
+
+        if not self.root:
+            self.root = TSTNode(word[0])
+
+        node = self.root
+        idx = 0
+
+        while True:
             char = word[idx]
-            if node is None:
-                node = TSTNode(char)
+
             if char < node.char:
-                node.left = _insert(node.left, word, idx)
+                if not node.left:
+                    node.left = TSTNode(char)
+                node = node.left
+
             elif char > node.char:
-                node.right = _insert(node.right, word, idx)
-            elif idx < len(word) - 1:
-                node.mid = _insert(node.mid, word, idx + 1)
-            else:
-                node.is_end = True
-            return node
+                if not node.right:
+                    node.right = TSTNode(char)
+                node = node.right
 
-        if word:
-            self.root = _insert(self.root, word, 0)
-
+            else:  # char == node.char
+                if idx == len(word) - 1:
+                    node.is_end = True
+                    return
+                if not node.mid:
+                    node.mid = TSTNode(word[idx + 1])
+                node = node.mid
+                idx += 1
+           
+    #CHANGED: Iterative version of search
     def search(self, word):
-        def _search(node, word, idx):
-            if node is None:
-                return False
-            char = word[idx]
-            if char < node.char:
-                return _search(node.left, word, idx)
-            elif char > node.char:
-                return _search(node.right, word, idx)
-            elif idx < len(word) - 1:
-                return _search(node.mid, word, idx + 1)
-            else:
-                return node.is_end
+        if not word or not self.root:
+            return False
 
-        return _search(self.root, word, 0) if word else False
+        node = self.root
+        idx = 0
+
+        while node:
+            char = word[idx]
+
+            if char < node.char:
+                node = node.left
+            elif char > node.char:
+                node = node.right
+            else:
+                if idx == len(word) - 1:
+                    return node.is_end
+                node = node.mid
+                idx += 1
+
+        return False
 
     def prefix_search(self, prefix):
-        
+     
         results = []
 
         def _collect(node, prefix_so_far):
@@ -81,7 +106,7 @@ class  TernarySearchTree:
         return results
 
     def count(self):
-        
+   
         def _count(node):
             if node is None:
                 return 0
@@ -91,7 +116,7 @@ class  TernarySearchTree:
         return _count(self.root)
 
     def all_strings(self):
-     
+ 
         results = []
 
         def _collect(node, path):
