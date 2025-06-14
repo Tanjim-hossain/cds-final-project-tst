@@ -1,66 +1,71 @@
 """
-demo_tst_with_real_data.py
+benchmark_tst.py
 
-Demonstrates the usage of Ternary Search Tree (TST) with the real project dataset.
-Features:
-- Insertion of words from file
-- Search and negative search checks
-- Prefix search example
-- Word count
-- Retrieve all stored words
-- ASCII tree visualization
+Benchmarks Ternary Search Tree (TST) insert and search performance using a large English word list.
+Generates and saves two plots: total operation time and average time per word.
 """
 
+import time
+import matplotlib.pyplot as plt
 from ternary_search_tree import TernarySearchTree
 
-# Data path (update if your path changes)
 DATA_PATH = "/Users/tanjimhossain/Documents/Concepts of Data Science/CDS_final-project/data/search_trees/"
 
-# Load insert words
-with open(DATA_PATH + "insert_words.txt") as f:
-    insert_words = [line.strip() for line in f if line.strip()]
+# Load a large list of words
+with open(DATA_PATH + "corncob_lowercase.txt") as f:
+    all_words = [line.strip() for line in f if line.strip()]
 
-# Load not-insert words
-with open(DATA_PATH + "not_insert_words.txt") as f:
-    not_insert_words = [line.strip() for line in f if line.strip()]
+# Choose different sizes for benchmarking
+sizes = [100, 500, 1000, 5000, 10000, 20000, 40000, 50000]
+insert_times = []
+search_times = []
 
-# Build tree
-tst = TernarySearchTree()
-for word in insert_words:
-    tst.insert(word)
+for size in sizes:
+    print(f"Benchmarking for size {size}...")
+    words = all_words[:size]
+    tst = TernarySearchTree()
+    
+    # Time insertion
+    t0 = time.time()
+    for word in words:
+        tst.insert(word)
+    insert_times.append(time.time() - t0)
+    
+    # Time search
+    t0 = time.time()
+    for word in words:
+        tst.search(word)
+    search_times.append(time.time() - t0)
 
-print("\n--- TST Demo with Real Dataset ---")
-print("Total words inserted:", len(insert_words))
+# Plot 1: Total Insert & Search Time
+plt.figure(num=1, figsize=(8,5))
+plt.plot(sizes, insert_times, marker='o', label="Insert Time")
+plt.plot(sizes, search_times, marker='o', label="Search Time")
+plt.xlabel("Number of Words")
+plt.ylabel("Total Time (seconds)")
+plt.title("Ternary Search Tree Performance: Insert & Search")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("TST_total_time.png")
+plt.show()
 
-# Check: all inserted words are found
-all_inserted_found = all(tst.search(word) for word in insert_words)
-print("All inserted words found?", all_inserted_found)
+# Plot 2: Average Time per Word
+per_word_insert = [t/s for t,s in zip(insert_times, sizes)]
+per_word_search = [t/s for t,s in zip(search_times, sizes)]
+x = range(len(sizes))
+width = 0.35
 
-# Check: all not-inserted words are NOT found
-all_not_inserted_not_found = all(not tst.search(word) for word in not_insert_words)
-print("All not-inserted words not found?", all_not_inserted_not_found)
+plt.figure(num=2, figsize=(6,4))
+plt.bar(x, per_word_insert, width, label="Insert per Word")
+plt.bar([i+width for i in x], per_word_search, width, label="Search per Word")
+plt.xticks([i+width/2 for i in x], sizes, rotation=45)
+plt.xlabel("Number of Words")
+plt.ylabel("Time per Word (seconds)")
+plt.title("Average Time per Word")
+plt.legend()
+plt.tight_layout()
+plt.savefig("TST_avg_time.png")
+plt.show()
 
-# Print some example searches
-if insert_words:
-    print(f"Example: search '{insert_words[0]}':", tst.search(insert_words[0]))
-if not_insert_words:
-    print(f"Example: search '{not_insert_words[0]}':", tst.search(not_insert_words[0]))
-
-# Prefix search example
-if insert_words:
-    prefix = insert_words[0][:2]
-    prefix_results = tst.prefix_search(prefix)
-    print(f"Prefix search for '{prefix}': (showing up to 5 results)", prefix_results[:5])
-
-# Count words
-print("TST count (number of unique words):", tst.count())
-
-# List all words (just preview the first 10)
-all_words = tst.all_strings()
-print("First 10 words in TST:", all_words[:10])
-
-# ASCII tree display (can be large for a big dataset)
-print("\nASCII Display (partial tree):")
-tst.ascii_display()
-
-print("\nDEMO COMPLETE\n")
+print("\nBenchmark complete! Plots saved as 'TST_total_time.png' and 'TST_avg_time.png'.")
