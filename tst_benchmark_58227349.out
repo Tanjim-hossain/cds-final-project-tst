@@ -1,0 +1,48 @@
+SLURM_JOB_ID: 58227349
+SLURM_JOB_USER: vsc37508
+SLURM_JOB_ACCOUNT: lp_h_ds_students
+SLURM_JOB_NAME: tst_benchmark
+SLURM_CLUSTER_NAME: genius
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: r26i13n03
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Sat Jun 14 10:12:46 CEST 2025
+Walltime: 00-00:05:00
+========================================================================
+==== TST BENCHMARK JOB START ====
+Job ID: 58227349
+Host: r26i13n03
+Started at: Sat Jun 14 10:12:51 CEST 2025
+Current directory: /vsc-hard-mounts/leuven-user/375/vsc37508
+Benchmarking for size 100...
+Insert time for 100: 0.0004 sec
+Search time for 100: 0.0002 sec
+Benchmarking for size 500...
+Insert time for 500: 0.0027 sec
+Search time for 500: 0.0016 sec
+Benchmarking for size 1000...
+Insert time for 1000: 0.0046 sec
+Search time for 1000: 0.0034 sec
+Benchmarking for size 5000...
+Insert time for 5000: 0.0295 sec
+Search time for 5000: 0.0216 sec
+Benchmarking for size 10000...
+Insert time for 10000: 0.0566 sec
+Search time for 10000: 0.0426 sec
+Benchmarking for size 20000...
+Insert time for 20000: 0.1267 sec
+Search time for 20000: 0.0923 sec
+Benchmarking for size 40000...
+Insert time for 40000: 0.2737 sec
+Search time for 40000: 0.2027 sec
+Benchmarking for size 50000...
+Insert time for 50000: 0.3515 sec
+Search time for 50000: 0.2636 sec
+
+==== Benchmark completed ====
+Total runtime: 1.48 seconds
+Insert times (s): [0.0003616809844970703, 0.0026929378509521484, 0.004615068435668945, 0.029497861862182617, 0.05662178993225098, 0.12666082382202148, 0.2736549377441406, 0.35146045684814453]
+Search times (s): [0.00024890899658203125, 0.0016357898712158203, 0.003400087356567383, 0.021556854248046875, 0.04257822036743164, 0.09229755401611328, 0.2026691436767578, 0.26359081268310547]
+==== TST BENCHMARK JOB END ====
+Ended at: Sat Jun 14 10:12:52 CEST 2025
