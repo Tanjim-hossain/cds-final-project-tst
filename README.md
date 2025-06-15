@@ -4,21 +4,20 @@ Authors: "Lucia jani 2470541"
         "Tanjim Hossain 2469700"
 
 
-## Repository Structure
-
 cds-final-project-tst/
-├── ternary_search_tree.py # TST implementation (object-oriented)
-├── benchmark_tst.py # Benchmarking script (prints and saves plots)
-├── run_demo.py # Demo usage example
-├── project_test.py # Unit tests for TST
-├── jobscript_tst_benchmark.slurm # SLURM script for HPC runs
-├── TST_total_time.png # Plot: Insert/Search Time vs. Number of Words
-├── TST_avg_time.png # Plot: Average Time per Word vs. Number of Words
-├── README.md # This documentation
-├── ternary_search_tree.ipynb # (Optional) Notebook version
+├── ternary_search_tree.py            # TST implementation (object-oriented)
+├── benchmark_tst.py                  # Benchmarking script (prints and saves plots)
+├── run_demo.py                       # Demo usage example
+├── project_test.py                   # Unit tests for TST
+├── jobscript_tst_benchmark.slurm     # SLURM script for HPC runs
+├── TST_total_time.png                # Plot: Insert/Search Time vs. Number of Words
+├── TST_avg_time.png                  # Plot: Average Time per Word vs. Number of Words
+├── README.md                         # This documentation
+├── ternary_search_tree.ipynb         # Notebook version
 ├── data/
-└── search_trees/
-└── corncob_lowercase.txt # Large dictionary file for benchmarking
+│   └── search_trees/
+│       └── corncob_lowercase.txt     # Large dictionary file for benchmarking
+
 
 
 This project is part of the **Concepts of Data Science** course. It implements an optimized **Ternary Search Tree (TST)** in Python with support for:
