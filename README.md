@@ -21,7 +21,7 @@ Authors: "Lucia jani 2470541"
 
 
 
-This project is part of the **Concepts of Data Science** course. It implements an optimized **Ternary Search Tree (TST)** in Python with support for:
+This project is part of the **Concepts of Data Science** course. It implements an optimized **Ternary Search Tree (TST)** in Python  using Object oriented programming with support for:
 
 - Efficient string insertion and search
 - Prefix-based queries
@@ -31,7 +31,7 @@ This project is part of the **Concepts of Data Science** course. It implements a
 - Visualization and documentation
 
 ## Benchmark Results
-The benchmarking script tests insert and search for various dictionary sizes (from 100 up to 50,000 words).
+The benchmarking script tests the run time for insert and search for various dictionary sizes (from 100 up to 50,000 words).
 Results are plotted and also printed in the console/HPC output.
 
 ### Timing Table
@@ -86,7 +86,7 @@ Search times (s): [0.00024890899658203125, 0.0016357898712158203, 0.003400087356
 
 ## Interpretation & Comparison:
 
-Growth Pattern: For both local and HPC runs, the time to insert/search increases nearly linearly as the number of words grows.
+Growth Pattern: For both local and HPC runs, the time to insert/search increases almost linearly as the number of words grows.
 
 Scalability:
 
